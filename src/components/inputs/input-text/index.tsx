@@ -1,5 +1,6 @@
 import { createOwnFormStateField } from "../../../hocs/form/create-field";
-import { BaseInputProps, Input } from "../../input";
+import { BaseInputProps } from "../../../types/fields";
+import { Input } from "../../input";
 
 export type InputTextProps = BaseInputProps;
 

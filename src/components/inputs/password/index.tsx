@@ -1,6 +1,7 @@
 import { HTMLInputTypeAttribute, useState } from "react";
 import { createOwnFormStateField } from "../../../hocs/form/create-field";
-import { BaseInputProps, Input } from "../../input";
+import { Input } from "../../input";
+import { BaseInputProps } from "../../../types/fields";
 
 export type InputTextProps = BaseInputProps;
 

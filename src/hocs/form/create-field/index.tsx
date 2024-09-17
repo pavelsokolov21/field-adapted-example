@@ -1,7 +1,7 @@
 import { ComponentType } from "react";
 import { AdaptedBaseInputProps } from "../../../types/form";
-import { BaseInputProps } from "../../../components/input";
 import { useField } from "../../../contexts/form-context/hooks";
+import { BaseInputProps } from "../../../types/fields";
 
 // Тут мы создаем адаптер, который будет создавать нам поля под нашу библиотеку
 // менеджемента формы.

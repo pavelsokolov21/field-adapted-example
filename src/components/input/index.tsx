@@ -3,23 +3,12 @@ import {
   FocusEvent,
   MouseEvent,
   forwardRef,
-  ReactElement,
   useState,
-  HTMLInputTypeAttribute,
 } from "react";
 import cn from "classnames";
 
 import styles from "./input.module.css";
-
-export interface BaseInputProps {
-  onChange?(value: string, e: ChangeEvent<HTMLInputElement>): void;
-  onFocus?(e: FocusEvent<HTMLInputElement>): void;
-  onBlur?(e: FocusEvent<HTMLInputElement>): void;
-  onRightIconClick?(e: MouseEvent<HTMLButtonElement>): void;
-  rightIcon?: ReactElement;
-  type?: HTMLInputTypeAttribute;
-  value: string;
-}
+import { BaseInputProps } from "../../types/fields";
 
 export const Input = forwardRef<HTMLInputElement, BaseInputProps>(
   (
@@ -31,6 +20,7 @@ export const Input = forwardRef<HTMLInputElement, BaseInputProps>(
       rightIcon,
       type,
       value = "",
+      placeholder,
     },
     _ref
   ) => {
@@ -89,6 +79,7 @@ export const Input = forwardRef<HTMLInputElement, BaseInputProps>(
             [styles.input_hovered]: hovered && !focused,
           })}
           type={type}
+          placeholder={placeholder}
         />
         {rightIcon && (
           <button

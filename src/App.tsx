@@ -19,6 +19,8 @@ const SomeForm = () => {
       <hr />
       <div>
         <Password name="password" />
+        Password has been focused:
+        <strong>{meta.focused.password ? "true" : "false"}</strong>
       </div>
     </>
   );
