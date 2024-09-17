@@ -5,6 +5,7 @@ import {
   forwardRef,
   ReactElement,
   useState,
+  HTMLInputTypeAttribute,
 } from "react";
 import cn from "classnames";
 
@@ -16,12 +17,21 @@ export interface BaseInputProps {
   onBlur?(e: FocusEvent<HTMLInputElement>): void;
   onRightIconClick?(e: MouseEvent<HTMLButtonElement>): void;
   rightIcon?: ReactElement;
+  type?: HTMLInputTypeAttribute;
   value: string | number;
 }
 
 export const Input = forwardRef<HTMLInputElement, BaseInputProps>(
   (
-    { onChange, onFocus, onBlur, onRightIconClick, rightIcon, value = "" },
+    {
+      onChange,
+      onFocus,
+      onBlur,
+      onRightIconClick,
+      rightIcon,
+      type,
+      value = "",
+    },
     ref
   ) => {
     const [focused, setFocused] = useState(false);
@@ -55,16 +65,38 @@ export const Input = forwardRef<HTMLInputElement, BaseInputProps>(
       }
     };
 
+    const onMouseEnterHandler = () => {
+      setHovered(true);
+    };
+
+    const onMouseLeaveHandler = () => {
+      setHovered(false);
+    };
+
+    // Тут также можно сделать rest-оператор на input
     return (
-      <div>
+      <div className={styles.root}>
         <input
           value={value}
           onChange={onChangeHandler}
           onBlur={onBlurHandler}
           onFocus={onFocusHandler}
+          onMouseEnter={onMouseEnterHandler}
+          onMouseLeave={onMouseLeaveHandler}
+          className={cn(styles.input, {
+            [styles.input_rightIcon]: !!rightIcon,
+            [styles.input_focused]: focused,
+            [styles.input_hovered]: hovered && !focused,
+          })}
+          type={type}
         />
         {rightIcon && (
-          <button onClick={onRightIconClickHandler}>{rightIcon}</button>
+          <button
+            onClick={onRightIconClickHandler}
+            className={styles.rightIcon}
+          >
+            {rightIcon}
+          </button>
         )}
       </div>
     );

@@ -9,9 +9,18 @@ function App() {
     setInputValue(e.target.value);
   };
 
+  const onClickClear = () => {
+    setInputValue("");
+  };
+
   return (
     <>
-      <Input value={inputValue} onChange={onChange} />
+      <Input
+        value={inputValue}
+        onChange={onChange}
+        onRightIconClick={onClickClear}
+        rightIcon={<div>D</div>}
+      />
       {inputValue}
     </>
   );
