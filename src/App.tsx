@@ -1,27 +1,28 @@
-import { ChangeEvent, useState } from "react";
 import "./App.css";
-import { Input } from "./components/input";
+import { InputText } from "./components/inputs/InputText";
+import { Form } from "./contexts/form-context";
+import { useForm } from "./contexts/form-context/hooks";
 
-function App() {
-  const [inputValue, setInputValue] = useState("");
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const onClickClear = () => {
-    setInputValue("");
-  };
+const SomeForm = () => {
+  const { values, meta } = useForm();
 
   return (
     <>
-      <Input
-        value={inputValue}
-        onChange={onChange}
-        onRightIconClick={onClickClear}
-        rightIcon={<div>D</div>}
-      />
-      {inputValue}
+      <InputText name="text" />
+      This is text input: <strong>{values.text}</strong>
+      <br />
+      Text has been focused:
+      <strong>{meta.focused.text ? "true" : "false"}</strong>
+    </>
+  );
+};
+
+function App() {
+  return (
+    <>
+      <Form initialValues={{ text: "initial" }}>
+        <SomeForm />
+      </Form>
     </>
   );
 }

@@ -12,13 +12,13 @@ import cn from "classnames";
 import styles from "./input.module.css";
 
 export interface BaseInputProps {
-  onChange?(e: ChangeEvent<HTMLInputElement>): void;
+  onChange?(value: string, e: ChangeEvent<HTMLInputElement>): void;
   onFocus?(e: FocusEvent<HTMLInputElement>): void;
   onBlur?(e: FocusEvent<HTMLInputElement>): void;
   onRightIconClick?(e: MouseEvent<HTMLButtonElement>): void;
   rightIcon?: ReactElement;
   type?: HTMLInputTypeAttribute;
-  value: string | number;
+  value: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, BaseInputProps>(
@@ -32,14 +32,14 @@ export const Input = forwardRef<HTMLInputElement, BaseInputProps>(
       type,
       value = "",
     },
-    ref
+    _ref
   ) => {
     const [focused, setFocused] = useState(false);
     const [hovered, setHovered] = useState(false);
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
       if (onChange) {
-        onChange(e);
+        onChange(e.target.value, e);
       }
     };
 
