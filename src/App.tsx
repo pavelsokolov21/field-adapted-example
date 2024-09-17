@@ -3,9 +3,17 @@ import { InputText } from "./components/inputs/input-text";
 import { Password } from "./components/inputs/password";
 import { Form } from "./contexts/form-context";
 import { useForm } from "./contexts/form-context/hooks";
+import { AdaptedBaseInputProps } from "./types/form";
 
 const SomeForm = () => {
   const { values, meta } = useForm();
+
+  const onChangePassword: AdaptedBaseInputProps["onChange"] = (
+    value,
+    { meta }
+  ) => {
+    console.log(value, meta.log);
+  };
 
   return (
     <>
@@ -18,7 +26,7 @@ const SomeForm = () => {
       </div>
       <hr />
       <div>
-        <Password name="password" />
+        <Password name="password" onChange={onChangePassword} />
         Password has been focused:
         <strong>{meta.focused.password ? "true" : "false"}</strong>
       </div>
